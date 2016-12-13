@@ -16,8 +16,6 @@ class PaymentsController < ApplicationController
   def new
     @company = current_company
     #select the services and cost from rates table; include them in @rates
-    @rates = []
-    @rates << Rate.first
     amt = 0.00
     # @rates.map {|r| amt = amt + r.amount}
     amt = rand(1000..20000)
@@ -29,7 +27,9 @@ class PaymentsController < ApplicationController
     payer_phone = "08087723454"
     ref = "Sample Reference for Item"
 
-    @payment = Payment.create(company_id: @company.id, merchantId: mid, serviceTypeId: sid, \
+    @payment = @company.current_payment
+
+    @payment.update(merchantId: mid, serviceTypeId: sid, \
       payerName: payer_name, payerEmail: payer_email, payerPhone: payer_phone, amount: amt, \
       reference: ref)
     @hash = Digest::SHA512::hexdigest(mid + sid + (@payment.id + 1000000).to_s + @payment.amount.to_s + payments_return_url + akey)

@@ -7,13 +7,14 @@ class Company < ActiveRecord::Base
 
   def process_tstore_and_generate_bill
     aggregate = aggregate_change_record
-    puts "Aggregate; #{aggregate} \n"
-    puts "Company ID: #{id}"
+    curr = current_payment
+    curr.generate_transaction_order aggregate 
+    curr  
+  end
+
+  def current_payment
     active_payments = Payment.where(company_id: id).where.not(workflow_state: "completed") 
-    current_payment = active_payments.empty? ? payments.create : active_payments.first
-    puts "Current Payment: #{current_payment}"
-    current_payment.generate_transaction_order aggregate 
-    current_payment  
+    curr = active_payments.empty? ? payments.create : active_payments.first
   end
 
   def aggregate_change_record

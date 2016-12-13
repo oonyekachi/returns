@@ -57,7 +57,7 @@ class CompaniesController < ApplicationController
       
       if @company.update(tstore: params[:company]["tstore"]) 
         @payment = @company.process_tstore_and_generate_bill
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.html { redirect_to new_payment_path }
         format.json
       else
         format.html { render :edit }

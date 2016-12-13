@@ -208,13 +208,12 @@ module Components
                         data = {}
                         data["tstore"] = tstore
                         state.address_update! 0
-                        HTTP.put("/companies/#{params.company.id}", payload: data) do |req|
-                          puts req
-                        end
-                        # `window.location = "/payments/new"`
-                        
-
-                        
+                        HTTP.put("/companies/#{params.company.id}", payload: data).then do |req|
+                          
+                        # end.fail do
+                        #   alert "failed to submit"
+                        end 
+                        `window.location = "/payments/new"` 
                       end 
                     end 
                   end
