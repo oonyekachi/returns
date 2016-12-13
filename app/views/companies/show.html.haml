@@ -1,0 +1,75 @@
+
+.small-12.columns
+  %h2
+    %b= @company.name.titleize
+
+  %p
+    %b Registered Company Number:
+    = @company.rc_number
+
+  %p
+    A 
+    %span{style: "font-weight: bold;"} Private Limited Company 
+    incorporated on 
+    %span{style: "font-weight: bold;"} 4 July 2003
+
+  %p
+    Registered Office Address: 
+    %span{style: "font-weight: bold;"} #{@company.registered_office_address.titleize}, #{@company.registered_office_city.titleize}, #{@company.registered_office_state.titleize} 
+
+  %hr{style: "border:none; margin-bottom: 2rem;"}
+
+#div-eq{"data-equalize-on" => "medium", "data-equalizer" => ""}
+  .medium-4.columns
+    %div{"data-equalizer-watch" => ""}
+
+      %hr{style: "border:none; margin-bottom: 1rem;"}
+      = link_to "File Annual Returns", filing_annual_path(@company), class: "button btn action alert"
+
+      %hr{style: "border:none; margin-bottom: 1rem;"}
+      = link_to "File Annual Account", "#", class: "button btn action"
+
+
+  .medium-4.columns
+    .callout{"data-equalizer-watch" => ""}
+      %h3{style: "color: #328740;"}
+        = fa_icon 'play-circle'
+        Accounts Up-to-Date
+      Next accounts made up to
+      %br
+      %b 30 October 2015 
+      due by
+      %br
+      %b 30 October 2016
+      %hr{style: "border:none; margin-bottom: 2rem;"}
+      Last accounts made up to
+      %br
+      %b 30 October 2015   
+
+      
+
+
+  .medium-4.columns
+    .callout{"data-equalizer-watch" => ""}
+      %h3{style: "color: crimson;"}
+        = fa_icon 'exclamation-circle'
+        Annual Returns Overdue
+      Next accounts made up to
+      %br
+      %b 30 October 2015 
+      due by
+      %br
+      %b 30 October 2016        
+      %hr{style: "border:none; margin-bottom: 2rem;"}
+      Last accounts made up to
+      %br
+      %b 30 October 2015       
+
+
+
+.small-12.columns{style: "border:none; margin-top: 2rem;"}
+  %h3 
+    %b Directors and Secretaries
+
+  = render 'directors'
+

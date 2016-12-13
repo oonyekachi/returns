@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  authorization_code: MyString
+  rc_number: 1
+  company_type_id: 1
+  incorporation_date: 2016-11-13
+  email_reminder: false
+  registered_office_address: MyText
+  registered_office_city: MyString
+  registered_office_state: MyString
+  annual_return_date: 2016-11-13
+  accounts_date: 2016-11-13
+
+two:
+  name: MyString
+  authorization_code: MyString
+  rc_number: 1
+  company_type_id: 1
+  incorporation_date: 2016-11-13
+  email_reminder: false
+  registered_office_address: MyText
+  registered_office_city: MyString
+  registered_office_state: MyString
+  annual_return_date: 2016-11-13
+  accounts_date: 2016-11-13
