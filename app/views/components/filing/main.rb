@@ -53,7 +53,7 @@ module Components
             end
           end  
           button(type: :button, class: "btn button alert right") { "Cancel" }.on(:click) do
-            alert("take back to home")
+            `window.location = "/"`
           end
 
 

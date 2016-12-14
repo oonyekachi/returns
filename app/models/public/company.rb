@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   has_many :shareholders, dependent: :destroy
   has_many :filers, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :submissions, dependent: :destroy
   # has_paper_trail
 
   def process_tstore_and_generate_bill
@@ -26,6 +27,19 @@ class Company < ActiveRecord::Base
       end
     end
     changeset
+  end
+
+  def commit_tstore_details
+
+  end
+
+  def submission_status
+    ret = {returns: false, accounts: false}
+    last_returns = submissions.where(submission_type: "returns").first
+    last_accounts = submissions.where(submission_type: "accounts").first
+    ret[:returns] = last_returns.end_date < Date.today unless last_returns.nil?
+    ret[:accounts] = last_accounts.end_date < Date.today unless last_accounts.nil?
+    ret
   end
 
 end

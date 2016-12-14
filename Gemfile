@@ -43,6 +43,7 @@ gem "rolify"
 gem "font-awesome-rails"
 gem 'hyper-rails'
 gem 'countries'
+gem 'rest-client'
 #gem 'reactive-record'
 
 # Use ActiveModel has_secure_password

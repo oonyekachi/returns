@@ -13,6 +13,7 @@ module Returns
     config.eager_load_paths += %W(#{config.root}/app/views/components)
     config.autoload_paths += %W(#{config.root}/app/views/components)
     config.assets.paths << ::Rails.root.join('app', 'models').to_s
+    config.active_record.raise_in_transactional_callbacks = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -25,8 +26,6 @@ module Returns
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.to_prepare do
       Devise::SessionsController.skip_before_filter :set_company!
