@@ -3,6 +3,7 @@ module Components
     class Annual < React::Component::Base
 
       param :company_id
+      param :countries
       # param param_with_default: "default value"
       # param :param_with_default2, default: "default value" # alternative syntax
       # param :param_with_type, type: Hash
@@ -40,7 +41,7 @@ module Components
           Header(company: @company)
           hr class: :noborder 
           Nav()
-          Main(company: @company, officers: @officers, shareholders: @shareholders)
+          Main(company: @company, officers: @officers, shareholders: @shareholders, countries: params.countries)
         end
       end
     end

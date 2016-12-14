@@ -4,6 +4,7 @@ module Components
 
       param :company
       param :officers
+      param :countries
       # param param_with_default: "default value"
       # param :param_with_default2, default: "default value" # alternative syntax
       # param :param_with_type, type: Hash
@@ -32,6 +33,7 @@ module Components
         state.tmp_tel_number! ""
         state.tmp_occupation! ""
         state.tmp_role! ""
+        state.tmp_state_array! []
       end
 
 
@@ -151,13 +153,41 @@ module Components
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
                         span {"Country"}
-                        input(class: "handle small-12", type: :text, placeholder: "Country").on(:change) do |e|
-                          state.tmp_country! e.target.value
+                        #input(class: "handle small-12", type: :text, placeholder: "Country").on(:change) do |e|
+                          #state.tmp_country! e.target.value
+                        #end
+                        select() do
+                          option(value: "") {"Select Country"}
+                          # puts params.countries
+                          params.countries.each do |c|
+                            option(value: c) {c}
+                          end
+                        end.on(:change) do |e|
+                          state.tmp_country!(e.target.value)
+                          data = {}
+                          data[:country] = e.target.value
+                          HTTP.post('/platform/country_states', payload: data) do |res|
+                            state.tmp_state_array! []
+                            state.tmp_state_array! res.json
+                          end
+
                         end
+
+
+                        # select(class: "handle small-12", value: @countries)  do |country|
+                        #   option(value: country) { country }
+                        # end.on(:change) 
                       end 
                       div(class: "handle small-12 large-6 medium-6 columns") do
                         span {"State"}
-                        input(class: "handle small-12", type: :text, placeholder: "State").on(:change) do |e|
+                        state.tmp_state_array
+
+                        select() do
+                          option(value: "") {"Select State"}
+                          state.tmp_state_array.each do |s|
+                            option(value: s) {s}
+                          end
+                        end.on(:change) do |e|
                           state.tmp_state! e.target.value
                         end
                       end                     

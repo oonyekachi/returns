@@ -3,7 +3,7 @@ class FilingController < ApplicationController
 
   def annual
     @company = Company.find (params[:id])
-    render_component company_id: @company.id
+    render_component(company_id: @company.id, countries: Country.all)
   end
 
   def home

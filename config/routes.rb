@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'platform/index'
 
   get 'platform/error'
+  post 'platform/country_states'
 
   devise_for :users
   resources :companies, only: [:show, :update] do

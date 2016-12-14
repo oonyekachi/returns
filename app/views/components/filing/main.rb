@@ -5,6 +5,7 @@ module Components
       param :company
       param :officers
       param :shareholders
+      param :countries
 
       def stepper(val)
         state.step! val
@@ -64,7 +65,7 @@ module Components
           when 2
             Location(company: params.company)
           when 3
-            Officers(company: params.company, officers: params.officers)
+            Officers(company: params.company, officers: params.officers, countries: params.countries)
           when 4
             Capital(company: params.company)           
           when 5

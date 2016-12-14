@@ -79,7 +79,8 @@ module Components
               end             
             end
           end
-          div(class: :row)
+          br
+          #div(class: :row)
         end
       end
     end

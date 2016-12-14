@@ -9,4 +9,11 @@ class PlatformController < ApplicationController
 
   def error
   end
+
+  def country_states
+  	@country_states = Country.states params[:country]
+  	respond_to do |format|
+  		format.json { render json: @country_states }
+  	end
+  end
 end
