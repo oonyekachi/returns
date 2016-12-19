@@ -2,6 +2,10 @@ module Components
   module Filing
     class Officers < React::Component::Base
 
+      def handleChange!(date)
+        state.tmp_dob! date
+      end
+
       param :company
       param :officers
       param :countries
@@ -29,12 +33,14 @@ module Components
         state.tmp_country! ""
         state.tmp_email! ""
         state.tmp_pod! ""
-        state.tmp_dob! "" 
+        state.tmp_dob! `moment()` 
         state.tmp_tel_number! ""
         state.tmp_occupation! ""
         state.tmp_role! ""
         state.tmp_state_array! []
       end
+
+
 
 
       after_mount do
@@ -112,9 +118,8 @@ module Components
                       end                     
                       div(class: "handle small-12 large-6 medium-6 columns") do
                         span {"Date of Birth"}
-                        input(class: "handle small-12", type: :text, placeholder: "Date of Birth").on(:change) do |e|
-                          state.tmp_dob! e.target.value
-                        end
+                        br
+                        DatePicker(selected: state.tmp_dob, showMonthDropdown: true, showYearDropdown: true, dropdownMode: "select")
                       end
                     end
 

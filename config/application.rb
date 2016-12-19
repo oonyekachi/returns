@@ -13,6 +13,7 @@ module Returns
     config.eager_load_paths += %W(#{config.root}/app/views/components)
     config.autoload_paths += %W(#{config.root}/app/views/components)
     config.assets.paths << ::Rails.root.join('app', 'models').to_s
+    # config.assets.paths << Rails.root.join('node_modules')
     config.active_record.raise_in_transactional_callbacks = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -30,6 +31,8 @@ module Returns
     config.to_prepare do
       Devise::SessionsController.skip_before_filter :set_company!
     end
+
+    
     
   end
 end

@@ -6,4 +6,8 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/node_modules
+
+/node_modules
+/vendor/assets/stylesheets/brunch
+/vendor/assets/javascripts/brunch
