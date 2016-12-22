@@ -1,0 +1,47 @@
+users:
+  - email: johndoe@mail.com
+    password: password
+
+  - email: peterpan@mail.com
+    password: password
+
+  - email: janecan@email.com
+    password: password
+
+rates:
+  - description: Basic
+    amount: 100.50
+    code: LOP1
+
+  - description: Standard
+    amount: 500.00
+    code: LOP2
+
+  - description: Premium
+    amount: 1000.00
+    code: LOP3
+
+companies:
+  - name: Wycheproof
+    authorization_code: 000000
+    rc_number: 100000
+    registered_office_address: 3 Old cross, Ketu
+    registered_office_city: Lagos
+    registered_office_state: Lagos
+    email: johndoe@mail.com
+
+  - name: Alphabet
+    authorization_code: 111111
+    rc_number: 111111
+    registered_office_address: 12 Wale Adelekan, Magodo
+    registered_office_city: Lagos
+    registered_office_state: Lagos
+    email: peterpan@mail.com
+
+  - name: SignalR
+    authorization_code: 222222
+    rc_number: 222222
+    registered_office_address: 67 Demo road , Victoria Island
+    registered_office_city: Lagos
+    registered_office_state: Lagos
+    email: janecan@email.com
