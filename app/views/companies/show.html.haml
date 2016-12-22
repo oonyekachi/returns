@@ -1,3 +1,8 @@
+- returns_status = @company.submission_status[:returns] ? "uptodate" : "alert"
+- accounts_status = @company.submission_status[:accounts] ? "uptodate" : "alert"
+- returns_string = @company.submission_status[:returns] ? "Annual Returns Up-to-Date" : "Annual Returns Overdue" 
+- accounts_string = @company.submission_status[:accounts] ? "Annual Accounts Up-to-Date" : "Annual Accounts Overdue" 
+
 
 .small-12.columns
   %h2
@@ -5,13 +10,12 @@
 
   %p
     %b Registered Company Number:
-    = @company.rc_number
-
+    %span{style: "color: #227731; font-weight: bold;"} #{@company.rc_number}
   %p
     A 
     %span{style: "font-weight: bold;"} Private Limited Company 
     incorporated on 
-    %span{style: "font-weight: bold;"} 4 July 2003
+    %span{style: "font-weight: bold;"} #{@company.incorporation_date.strftime('%d %b %Y') }
 
   %p
     Registered Office Address: 
@@ -24,17 +28,18 @@
     %div{"data-equalizer-watch" => ""}
 
       %hr{style: "border:none; margin-bottom: 1rem;"}
-      = link_to "File Annual Returns", filing_annual_path(@company), class: "button btn action alert"
+      = link_to "File Annual Returns", filing_annual_path(@company), class: "button btn action #{returns_status}"
 
-      %hr{style: "border:none; margin-bottom: 1rem;"}
-      = link_to "File Annual Account", "#", class: "button btn action"
+      - unless returns_status
+        %hr{style: "border:none; margin-bottom: 1rem;"}
+        = link_to "Submit Annual Accounts", "#", class: "button btn action #{accounts_status}"
 
 
   .medium-4.columns
     .callout{"data-equalizer-watch" => ""}
       %h3{style: "color: #328740;"}
         = fa_icon 'play-circle'
-        Accounts Up-to-Date
+        = returns_string
       Next accounts made up to
       %br
       %b 30 October 2015 
@@ -53,7 +58,7 @@
     .callout{"data-equalizer-watch" => ""}
       %h3{style: "color: crimson;"}
         = fa_icon 'exclamation-circle'
-        Annual Returns Overdue
+        = accounts_string
       Next accounts made up to
       %br
       %b 30 October 2015 

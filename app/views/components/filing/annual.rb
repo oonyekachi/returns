@@ -39,7 +39,7 @@ module Components
       def render
         div do
           Header(company: @company)
-          hr class: :noborder 
+          hr class: :noborder
           Nav()
           Main(company: @company, officers: @officers, shareholders: @shareholders, countries: params.countries)
         end

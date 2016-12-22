@@ -197,21 +197,40 @@ module Components
                         Store.add_item("filer_tel_number", state.filer_tel_number)
                         Store.commit()
                         tstore = {}
+                        i = 0
                         Store.each do |k,v|
                           unless k == ("officers" || "shareholders")
                             tstore[k] = v 
-                          else
-                            tstore[k] = v.to_json
+                          # else
+                            
+                            # v.each do |a|
+                            #   tstore[k] = a.to_json 
+                            # end
+
                           end
                         end
+
+                        off = Store.retrieve_item("officers")
+                        offs = []
+                        off.each do |o|
+                          offs << o.attributes
+                        end
+
+                        share = Store.retrieve_item("shareholders")
+                        shares = []
+                        share.each do |s|
+                          shares << s.attributes
+                        end
+
                         
                         data = {}
-                        data["tstore"] = tstore
+                        tstore["officers"] = offs
+                        tstore["shareholders"] = shares
+                        data["tstore"] = tstore                        
                         state.address_update! 0
+
                         HTTP.put("/companies/#{params.company.id}", payload: data).then do |req|
                           
-                        # end.fail do
-                        #   alert "failed to submit"
                         end 
                         `window.location = "/payments/new"` 
                       end 

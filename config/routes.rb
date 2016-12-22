@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'payments/return' => 'payments#remita_return'
   post 'payments/poster' => 'payments#temp_poster'
-  resources :payments
+  resources :payments, only: [:new]
   mount HyperMesh::Engine => '/rr'
   get 'platform/index'
 

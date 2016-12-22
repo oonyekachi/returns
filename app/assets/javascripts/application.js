@@ -19,6 +19,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require sha512.min.js
+//= require webpack/client_only
 Opal.load('components');
 //= require turbolinks
 //= require_tree .

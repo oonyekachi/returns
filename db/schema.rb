@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212193335) do
+ActiveRecord::Schema.define(version: 20161214143154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,16 @@ ActiveRecord::Schema.define(version: 20161212193335) do
     t.integer  "company_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "filer_id"
+    t.string   "submission_type"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "synchromesh_connections", force: :cascade do |t|

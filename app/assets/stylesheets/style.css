@@ -27,6 +27,10 @@ table thead tr th{
  background-color: #d36247;
 }
 
+select {
+  padding-right: 1.25rem;
+}
+
 b label {
     font-weight: bold;
 }

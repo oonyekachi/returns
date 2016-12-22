@@ -31,7 +31,7 @@ gem 'ancestry'
 gem 'kaminari'
 gem 'haml-rails'
 gem 'remotipart', '~> 1.2'
-gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'jquery-ui-rails'
 gem 'puma'
 gem 'quiet_assets'
 gem 'cocoon'
@@ -43,6 +43,9 @@ gem "rolify"
 gem "font-awesome-rails"
 gem 'hyper-rails'
 gem 'countries'
+gem 'rest-client'
+gem 'npm-pipeline-rails'
+
 #gem 'reactive-record'
 
 # Use ActiveModel has_secure_password
