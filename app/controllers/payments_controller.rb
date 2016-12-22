@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
     @payment.update(merchantId: mid, serviceTypeId: sid, \
       payerName: payer_name, payerEmail: payer_email, payerPhone: payer_phone, amount: amt, \
       reference: ref)
-    @payment.submit!
+    # @payment.submit!
     @hash = Digest::SHA512::hexdigest(mid + sid + (@payment.id + 1000000).to_s + @payment.amount.to_s + payments_return_url + akey)
 
   end

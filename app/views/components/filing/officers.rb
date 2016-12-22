@@ -119,7 +119,7 @@ module Components
                       div(class: "handle small-12 large-6 medium-6 columns") do
                         span {"Date of Birth"}
                         br
-                        DatePicker(selected: state.tmp_dob, showMonthDropdown: true, showYearDropdown: true, dropdownMode: "select")
+                        DatePicker(selected: state.tmp_dob, onChange: method(:handleChange!).to_proc, showMonthDropdown: true, showYearDropdown: true, dropdownMode: "select")
                       end
                     end
 
@@ -224,8 +224,9 @@ module Components
 
                     div do
                       button(type: :button, class: "btn button action") { "Add" }.on(:click) do
+                        
 
-                        officer = Officer.new(surname: state.tmp_surname, first_name: state.tmp_fname, other_names: state.tmp_oname, nationality: state.tmp_nationality, dob: state.tmp_dob, tel_number: state.tmp_tel_number, residential_address: state.tmp_address, residential_address_city: state.tmp_city, residential_address_state: state.tmp_state, residential_address_country: state.tmp_country, email: state.tmp_email, occupation: state.tmp_occupation, particulars_of_other_directorship: state.tmp_pod, role: state.tmp_role)
+                        officer = Officer.new(surname: state.tmp_surname, first_name: state.tmp_fname, other_names: state.tmp_oname, nationality: state.tmp_nationality, dob: state.tmp_dob.JS.format('DD MMM YYYY'), tel_number: state.tmp_tel_number, residential_address: state.tmp_address, residential_address_city: state.tmp_city, residential_address_state: state.tmp_state, residential_address_country: state.tmp_country, email: state.tmp_email, occupation: state.tmp_occupation, particulars_of_other_directorship: state.tmp_pod, role: state.tmp_role)
                         state.officers! << officer
                         Store.add_item("officers", state.officers)
                         state.add_officer! 0
