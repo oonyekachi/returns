@@ -1,4 +1,10 @@
 class Officer < ActiveRecord::Base
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  #validates :surname, :first_name, :role, :nationality, :occupation, :dob, :residential_address, presence: true  
+  #validates :residential_address_city, :residential_address_country, :residential_address_state, presence: true
+  #validates :email, presence: true, format:     { with: VALID_EMAIL_REGEX }
+
   belongs_to :company
   # has_paper_trail
 

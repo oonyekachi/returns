@@ -5,6 +5,16 @@ module Components
       def handleChange!(date)
         state.tmp_dob! date
       end
+      def valid_officer_input?
+        result = state.tmp_surname.present? && state.tmp_fname.present? && state.tmp_role.present?
+        result = result && state.tmp_nationality.present? && state.tmp_address.present?
+        result = result && state.tmp_city.present? && state.tmp_country.present? && state.tmp_state.present?
+        result && is_a_valid_email?(state.tmp_email) && state.tmp_occupation.present?
+      end
+      def is_a_valid_email?(email)
+        VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+$/i
+        email.present? && ((email =~ VALID_EMAIL_REGEX) == 0)
+      end
 
       param :company
       param :officers
@@ -78,13 +88,13 @@ module Components
                     hr class: :noborder
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"Surname"}
+                        span {"Surname *"}
                         input(class: "handle small-12", type: :text, placeholder: "Surname").on(:change) do |e|
                           state.tmp_surname! e.target.value
                         end
                       end
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"First Name"}
+                        span {"First Name *"}
                         input(class: "handle small-12", type: :text, placeholder: "First Name").on(:change) do |e|
                           state.tmp_fname! e.target.value
                         end
@@ -98,7 +108,7 @@ module Components
                         end
                       end                     
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"Role"}
+                        span {"Role *"}
                         select() do
                           option(value: "") {"Select Role"}
                           option(value: "Director") {"Director"}
@@ -111,13 +121,13 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Nationality"}
+                        span {"Nationality *"}
                         input(class: "handle small-12", type: :text, placeholder: "Nationality").on(:change) do |e|
                           state.tmp_nationality! e.target.value
                         end
                       end                     
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Date of Birth"}
+                        span {"Date of Birth *"}
                         br
                         DatePicker(selected: state.tmp_dob, onChange: method(:handleChange!).to_proc, showMonthDropdown: true, showYearDropdown: true, dropdownMode: "select")
                       end
@@ -125,7 +135,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 columns") do
-                        span {"Residential Address"}
+                        span {"Residential Address *"}
                         input(class: "handle small-12", type: :text, placeholder: "Residential Address").on(:change) do |e|
                           state.tmp_address! e.target.value
                         end
@@ -142,7 +152,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"City"}
+                        span {"City *"}
                         input(class: "handle small-12", type: :text, placeholder: "City").on(:change) do |e|
                           state.tmp_city! e.target.value
                         end
@@ -157,7 +167,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Country"}
+                        span {"Country *"}
                         #input(class: "handle small-12", type: :text, placeholder: "Country").on(:change) do |e|
                           #state.tmp_country! e.target.value
                         #end
@@ -184,7 +194,7 @@ module Components
                         # end.on(:change) 
                       end 
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"State"}
+                        span {"State *"}
                         state.tmp_state_array
 
                         select() do
@@ -200,13 +210,13 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Email"}
-                        input(class: "handle small-12", type: :text, placeholder: "Email").on(:change) do |e|
+                        span {"Email *"}
+                        input(class: "handle small-12", type: :email, placeholder: "Email").on(:change) do |e|
                           state.tmp_email! e.target.value
                         end
                       end                     
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Occupation"}
+                        span {"Occupation *"}
                         input(class: "handle small-12", type: :text, placeholder: "Occupation").on(:change) do |e|
                           state.tmp_occupation! e.target.value
                         end
@@ -231,7 +241,7 @@ module Components
                         Store.add_item("officers", state.officers)
                         state.add_officer! 0
 
-                      end
+                      end if valid_officer_input?
                       button(type: :button, class: "btn button action inner") { "Cancel" }.on(:click) do
                         state.add_officer! 0
                       end

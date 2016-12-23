@@ -118,18 +118,18 @@ office of the company"}
               div(class: "small-12 large-4 medium-4 collapse columns") do
                 if (state.location_update == 1) 
                   div do
-                    text {"Situation Address"}
+                    text {"Situation Address *"}
                     input(class: :handle, type: :text, placeholder: "Situation Address", value: state.sit_address).on(:change) do |e|
                       state.sit_address! e.target.value
                     end
                     input(class: :handle, type: :text, placeholder: "Situation Address 2", value: state.sit_address_2).on(:change) do |e|
                       state.sit_address_2! e.target.value
                     end
-                    text {"Situation City"}
+                    text {"Situation City *"}
                     input(class: :handle, type: :text, placeholder: "Situation City", value: state.sit_city).on(:change) do |e|
                       state.sit_city! e.target.value
                     end
-                    text {"Situation State"}
+                    text {"Situation State *"}
                     input(class: :handle, type: :text, placeholder: "Situation State", value: state.sit_state).on(:change) do |e|
                       state.sit_state! e.target.value
                     end

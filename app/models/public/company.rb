@@ -1,7 +1,8 @@
 class Company < ActiveRecord::Base
 
-  validates :registered_office_address, :registered_office_city, :registered_office_state, :zonal_office, presence: true
-  validates :situation_address, :situation_city, :situation_state, presence: true
+  #validates :registered_office_address, :registered_office_city, :registered_office_state, :zonal_office, presence: true
+  #validates :situation_address, :situation_city, :situation_state, presence: true
+  #validates :auth_share_capital, :number_of_shares, :share_price, :issued_share_capital, :paid_up_capital, presence: true
 
   has_many :officers, dependent: :destroy
   has_many :shareholders, dependent: :destroy

@@ -29,6 +29,7 @@ companies:
     registered_office_city: Lagos
     registered_office_state: Lagos
     email: johndoe@mail.com
+    incorporation_date: 2016-02-22
 
   - name: Alphabet
     authorization_code: 111111
@@ -37,11 +38,13 @@ companies:
     registered_office_city: Lagos
     registered_office_state: Lagos
     email: peterpan@mail.com
+    incorporation_date: 2016-05-12
 
   - name: SignalR
     authorization_code: 222222
     rc_number: 222222
-    registered_office_address: 67 Demo road , Victoria Island
+    registered_office_address: 67 Demo road, Victoria Island
     registered_office_city: Lagos
     registered_office_state: Lagos
     email: janecan@email.com
+    incorporation_date: 2016-08-14

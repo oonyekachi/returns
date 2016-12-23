@@ -5,3 +5,5 @@ React = require('react');
 
 DatePicker = require('react-datepicker');
 moment = require('moment');
+
+EmailValidator = require('email-validator');

@@ -3,7 +3,7 @@ module Components
     class Address < React::Component::Base
 
       def valid_address_input?
-        state.reg_address.present? && state.reg_city.present? && state.reg_state.present?
+        state.reg_address.present? && state.reg_city.present? && state.reg_state.present? && state.reg_zone.present?
       end
 
       param :company
