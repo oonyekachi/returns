@@ -3,7 +3,8 @@ module Components
     class Capital < React::Component::Base
 
       def valid_capital_input?
-        true
+        result = state.cap_auth_share_capital.present? && state.cap_number_of_shares.present?
+        result && state.cap_issued_share_capital.present? && state.cap_paid_up_capital.present?
       end
 
       param :company
@@ -97,14 +98,14 @@ module Components
                   div do
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Authorized Share Capital"}
-                        input(class: "handle small-12", type: :text, placeholder: "Authorized Share Capital", value: state.cap_auth_share_capital).on(:change) do |e|
+                        span {"Authorized Share Capital *"}
+                        input(class: "handle small-12", type: :number, placeholder: "Authorized Share Capital", value: state.cap_auth_share_capital).on(:change) do |e|
                           state.cap_auth_share_capital! e.target.value
                         end
                       end 
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Number of Shares"}
-                        input(class: "handle small-12", type: :text, placeholder: "Number of Shares", value: state.cap_number_of_shares).on(:change) do |e|
+                        span {"Number of Shares *"}
+                        input(class: "handle small-12", type: :number, placeholder: "Number of Shares", value: state.cap_number_of_shares).on(:change) do |e|
                           state.cap_number_of_shares! e.target.value
                         end
                       end                     
@@ -113,7 +114,7 @@ module Components
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
                         span {"Price of Shares (N)"}
-                        input(class: "handle small-12", type: :text, placeholder: "Price of Shares (N)", value: state.cap_share_price).on(:change) do |e|
+                        input(class: "handle small-12", type: :number, placeholder: "Price of Shares (N)", value: state.cap_share_price).on(:change) do |e|
                           state.cap_share_price! e.target.value
                         end
                       end                      
@@ -121,14 +122,14 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Issued Share Capital"}
-                        input(class: "handle small-12", type: :text, placeholder: "Issued Share Capital", value: state.cap_issued_share_capital).on(:change) do |e|
+                        span {"Issued Share Capital *"}
+                        input(class: "handle small-12", type: :number, placeholder: "Issued Share Capital", value: state.cap_issued_share_capital).on(:change) do |e|
                           state.cap_issued_share_capital! e.target.value
                         end
                       end 
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Paid Up Capital"}
-                        input(class: "handle small-12", type: :text, placeholder: "Paid Up Capital", value: state.cap_paid_up_capital).on(:change) do |e|
+                        span {"Paid Up Capital *"}
+                        input(class: "handle small-12", type: :number, placeholder: "Paid Up Capital", value: state.cap_paid_up_capital).on(:change) do |e|
                           state.cap_paid_up_capital! e.target.value
                         end
                       end                     
@@ -143,7 +144,7 @@ module Components
                         Store.add_item("cap_issued_share_capital", state.cap_issued_share_capital)
                         Store.add_item("cap_paid_up_capital", state.cap_paid_up_capital)
                         state.capital_update! 0
-                      end
+                      end if valid_capital_input?
                       button(type: :button, class: "btn button action inner") { "Cancel" }.on(:click) do
                         state.capital_update! 0
                       end

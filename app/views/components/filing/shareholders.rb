@@ -2,8 +2,15 @@ module Components
   module Filing
     class Shareholders < React::Component::Base
 
+      def valid_shareholder_input?
+        result = state.tmp_surname.present? && state.tmp_fname.present?
+        result = result && state.tmp_nationality.present? && state.tmp_address.present?
+        result && state.tmp_city.present? && state.tmp_country.present? && state.tmp_state.present?
+      end
+
       param :company
       param :shareholders
+      param :countries
       # param param_with_default: "default value"
       # param :param_with_default2, default: "default value" # alternative syntax
       # param :param_with_type, type: Hash
@@ -27,6 +34,7 @@ module Components
         state.tmp_state! ""
         state.tmp_country! ""
         state.tmp_holding! ""
+        state.tmp_state_array! []
       end
 
       after_mount do
@@ -64,13 +72,13 @@ module Components
                     hr class: :noborder
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"Surname"}
+                        span {"Surname *"}
                         input(class: "handle small-12", type: :text, placeholder: "Surname").on(:change) do |e|
                           state.tmp_surname! e.target.value
                         end
                       end
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"First Name"}
+                        span {"First Name *"}
                         input(class: "handle small-12", type: :text, placeholder: "First Name").on(:change) do |e|
                           state.tmp_fname! e.target.value
                         end
@@ -93,7 +101,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Nationality"}
+                        span {"Nationality *"}
                         input(class: "handle small-12", type: :text, placeholder: "Nationality").on(:change) do |e|
                           state.tmp_nationality! e.target.value
                         end
@@ -102,7 +110,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 columns") do
-                        span {"Residential Address"}
+                        span {"Residential Address *"}
                         input(class: "handle small-12", type: :text, placeholder: "Residential Address").on(:change) do |e|
                           state.tmp_address! e.target.value
                         end
@@ -116,7 +124,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"City"}
+                        span {"City *"}
                         input(class: "handle small-12", type: :text, placeholder: "City").on(:change) do |e|
                           state.tmp_city! e.target.value
                         end
@@ -125,16 +133,35 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Country"}
-                        input(class: "handle small-12", type: :text, placeholder: "Country").on(:change) do |e|
-                          state.tmp_country! e.target.value
+                        span {"Country *"}
+                        select() do
+                          option(value: "") {"Select Country"}
+                           puts params.countries
+                          params.countries.each do |c|
+                            option(value: c) {c}
+                          end
+                        end.on(:change) do |e|
+                          state.tmp_country!(e.target.value)
+                          data = {}
+                          data[:country] = e.target.value
+                          HTTP.post('/platform/country_states', payload: data) do |res|
+                            state.tmp_state_array! []
+                            state.tmp_state_array! res.json
+                          end
                         end
                       end 
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"State"}
-                        input(class: "handle small-12", type: :text, placeholder: "State").on(:change) do |e|
+                        span {"State *"}
+                        state.tmp_state_array
+
+                        select() do
+                          option(value: "") {"Select State"}
+                          state.tmp_state_array.each do |s|
+                            option(value: s) {s}
+                          end
+                        end.on(:change) do |e|
                           state.tmp_state! e.target.value
-                        end
+                        end 
                       end                     
                     end
 
@@ -145,7 +172,7 @@ module Components
                         state.shareholders! << shareholder
                         Store.add_item("shareholders", state.shareholders)
                         state.add_shareholder! 0
-                      end
+                      end if valid_shareholder_input?
                       button(type: :button, class: "btn button action inner") { "Cancel" }.on(:click) do
                         state.add_shareholder! 0
                       end

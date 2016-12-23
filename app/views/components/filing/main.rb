@@ -69,7 +69,7 @@ module Components
           when 4
             Capital(company: params.company)           
           when 5
-            Shareholders(company: params.company, shareholders: params.shareholders)
+            Shareholders(company: params.company, shareholders: params.shareholders, countries: params.countries)
           when 6
             Submit(stepper: method(:stepper).to_proc, company: params.company)
           when 7

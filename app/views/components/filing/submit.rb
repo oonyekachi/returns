@@ -2,6 +2,16 @@ module Components
   module Filing
     class Submit < React::Component::Base
 
+      def valid_filer_input?
+        result = state.filer_surname.present? && state.filer_fname.present? && state.filer_accr.present?
+        result = result && state.filer_address.present? && state.filer_city.present? && state.filer_state.present? 
+        result && is_a_valid_email?(state.filer_email) && state.filer_tel_number.present?
+      end
+      def is_a_valid_email?(email)
+        VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+$/i
+        email.present? && ((email =~ VALID_EMAIL_REGEX) == 0)
+      end
+
       param :stepper, type: Proc
       param :company
 
@@ -69,13 +79,13 @@ module Components
                     hr class: :noborder
                     div(class: :row) do
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Surname"}
+                        span {"Surname *"}
                         input(class: "handle small-12", type: :text, placeholder: "Surname").on(:change) do |e|
                           state.filer_surname! e.target.value
                         end
                       end
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"First Name"}
+                        span {"First Name *"}
                         input(class: "handle small-12", type: :text, placeholder: "First Name").on(:change) do |e|
                           state.filer_fname! e.target.value
                         end
@@ -90,7 +100,7 @@ module Components
                         end
                       end
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Accreditation Number"}
+                        span {"Accreditation Number *"}
                         input(class: "handle small-12", type: :text, placeholder: "Accreditation Number").on(:change) do |e|
                           state.filer_accr! e.target.value
                         end
@@ -101,7 +111,7 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-12 columns") do
-                        span {"Address"}
+                        span {"Address *"}
                         input(class: "handle small-12", type: :text, placeholder: "Address").on(:change) do |e|
                           state.filer_address! e.target.value
                         end
@@ -118,13 +128,13 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"City"}
+                        span {"City *"}
                         input(class: "handle small-12", type: :text, placeholder: "City").on(:change) do |e|
                           state.filer_city! e.target.value
                         end
                       end                     
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"State"}
+                        span {"State *"}
                         input(class: "handle small-12", type: :text, placeholder: "State").on(:change) do |e|
                           state.filer_state! e.target.value
                         end
@@ -133,13 +143,13 @@ module Components
 
                     div(class: :row) do
                       div(class: "handle small-6 large-6 medium-6 columns") do
-                        span {"Tel Number"}
+                        span {"Tel Number *"}
                         input(class: "handle small-12", type: :text, placeholder: "Tel Number").on(:change) do |e|
                           state.filer_tel_number! e.target.value
                         end
                       end                     
                       div(class: "handle small-12 large-6 medium-6 columns") do
-                        span {"Email"}
+                        span {"Email *"}
                         input(class: "handle small-12", type: :text, placeholder: "Email").on(:change) do |e|
                           state.filer_email! e.target.value
                         end
@@ -233,7 +243,7 @@ module Components
                           
                         end 
                         `window.location = "/payments/new"` 
-                      end 
+                      end if valid_filer_input?
                     end 
                   end
                 end
