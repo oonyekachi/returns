@@ -33780,3 +33780,29 @@ Started GET "/__OPAL_SOURCE_MAPS__/opal.self.map" for 127.0.0.1 at 2016-12-23 18
   [1m[35m (272.4ms)[0m  CREATE TABLE "synchromesh_connections" ("id" serial primary key, "channel" character varying, "session" character varying, "created_at" timestamp, "expires_at" timestamp, "refresh_at" timestamp) 
   [1m[36m (13.4ms)[0m  [1mDROP TABLE "synchromesh_queued_messages"[0m
   [1m[35m (181.8ms)[0m  CREATE TABLE "synchromesh_queued_messages" ("id" serial primary key, "data" text, "connection_id" integer) 
+
+Started GET "/filing/3/annual" for 127.0.0.1 at 2016-12-28 11:07:33 +0100
+Processing by FilingController#annual as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36mCompany Load (0.5ms)[0m  [1mSELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mCompany Load (0.5ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mHyperMesh::Connection Load (0.4ms)[0m  [1mSELECT  "synchromesh_connections".* FROM "synchromesh_connections" WHERE "synchromesh_connections"."channel" = $1 AND "synchromesh_connections"."session" = $2 LIMIT 1[0m  [["channel", "Application"], ["session", "5f79832d-fca9-40eb-b019-fd7509484279-bc547d9f56769f10808038eadbc2549a"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "synchromesh_connections" ("channel", "session", "created_at", "expires_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["channel", "Application"], ["session", "5f79832d-fca9-40eb-b019-fd7509484279-bc547d9f56769f10808038eadbc2549a"], ["created_at", "2016-12-28 10:07:35.569248"], ["expires_at", "2016-12-28 10:07:45.569430"]]
+  [1m[35m (18.9ms)[0m  COMMIT
+  Rendered inline template within layouts/application (1731.8ms)
+  Rendered layouts/_header.html.haml (5.3ms)
+  Rendered layouts/_error_header.html.haml (0.2ms)
+Completed 200 OK in 8576ms (Views: 8420.6ms | ActiveRecord: 23.6ms)
+
+
+Started POST "/rr" for 127.0.0.1 at 2016-12-28 11:07:49 +0100
+Processing by ReactiveRecord::ReactiveRecordController#fetch as */*
+  Parameters: {"json"=>"{\"models\":[{\"id\":1546, \"model\":\"Company\", \"attributes\":{\"id\":3}, \"vector\":[\"Company\", [\"find_by_id\", 3]]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], [\"[]\", \"situation_address\"]]]}", "reactive_record"=>{"json"=>"{\"models\":[{\"id\":1546, \"model\":\"Company\", \"attributes\":{\"id\":3}, \"vector\":[\"Company\", [\"find_by_id\", 3]]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], [\"[]\", \"situation_address\"]]]}"}}
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mCompany Load (0.4ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.0ms)

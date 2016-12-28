@@ -6,6 +6,14 @@ module Components
         state.sit_address.present? && state.sit_city.present? && state.sit_state.present?
       end
 
+      def reset_situation_state
+        state.location_update! 0
+        state.sit_address! ""
+        state.sit_address_2! ""
+        state.sit_city! ""
+        state.sit_state! ""
+      end
+
       param :company
       # param param_with_default: "default value"
       # param :param_with_default2, default: "default value" # alternative syntax
@@ -143,7 +151,7 @@ office of the company"}
                         state.location_update! 0
                       end if valid_situation_input?
                       button(type: :button, class: "btn button action inner") { "Discard" }.on(:click) do
-                        state.location_update! 0
+                        reset_situation_state
                       end
                     end                    
                   end
