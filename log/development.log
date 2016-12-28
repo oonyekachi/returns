@@ -33806,3 +33806,76 @@ Processing by ReactiveRecord::ReactiveRecordController#fetch as */*
   [1m[35mCompany Load (0.4ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
   [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
 Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-28 11:37:28 +0100
+Processing by PlatformController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36mCompany Load (0.7ms)[0m  [1mSELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1[0m  [["id", 3]]
+Redirected to http://localhost:3000/companies/3
+Completed 302 Found in 278ms (ActiveRecord: 136.0ms)
+
+
+Started GET "/companies/3" for 127.0.0.1 at 2016-12-28 11:37:29 +0100
+Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mSubmission Load (0.3ms)[0m  SELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1  [["company_id", 3], ["submission_type", "returns"]]
+  [1m[36mSubmission Load (0.4ms)[0m  [1mSELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1[0m  [["company_id", 3], ["submission_type", "accounts"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1  [["company_id", 3], ["submission_type", "returns"]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1[0m  [["company_id", 3], ["submission_type", "accounts"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1  [["company_id", 3], ["submission_type", "returns"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1[0m  [["company_id", 3], ["submission_type", "accounts"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1  [["company_id", 3], ["submission_type", "returns"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "submissions".* FROM "submissions" WHERE "submissions"."company_id" = $1 AND "submissions"."submission_type" = $2  ORDER BY "submissions"."id" ASC LIMIT 1[0m  [["company_id", 3], ["submission_type", "accounts"]]
+  Rendered companies/_directors.html.haml (0.2ms)
+  Rendered companies/show.html.haml within layouts/application (267.4ms)
+  Rendered layouts/_header.html.haml (97.5ms)
+  Rendered layouts/_error_header.html.haml (0.5ms)
+Completed 200 OK in 13215ms (Views: 13208.8ms | ActiveRecord: 3.6ms)
+
+
+Started POST "/rr" for 127.0.0.1 at 2016-12-28 12:06:12 +0100
+Processing by ReactiveRecord::ReactiveRecordController#fetch as */*
+  Parameters: {"json"=>"{\"models\":[{\"id\":39464, \"model\":\"Officer\", \"attributes\":{\"id\":null}, \"vector\":[\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\"]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], \"officers\", \"*all\"], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"surname\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"first_name\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"other_names\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"role\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"nationality\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"dob\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_2\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_city\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_pob\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_state\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_country\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"email\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"occupation\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"tel_number\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"particulars_of_other_directorship\"]]]}", "reactive_record"=>{"json"=>"{\"models\":[{\"id\":39464, \"model\":\"Officer\", \"attributes\":{\"id\":null}, \"vector\":[\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\"]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], \"officers\", \"*all\"], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"surname\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"first_name\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"other_names\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"role\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"nationality\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"dob\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_2\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_city\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_pob\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_state\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"residential_address_country\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"email\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"occupation\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"tel_number\"]], [\"Company\", [\"find_by_id\", 3], \"officers\", \"*0\", [\"[]\", \"particulars_of_other_directorship\"]]]}"}}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mCompany Load (1.2ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mOfficer Load (100.6ms)[0m  [1mSELECT "officers".* FROM "officers" WHERE "officers"."company_id" = $1[0m  [["company_id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "officers".* FROM "officers" WHERE "officers"."company_id" = $1[0m  [["company_id", 3]]
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 200 OK in 964ms (Views: 0.3ms | ActiveRecord: 567.7ms)
+
+
+Started POST "/rr" for 127.0.0.1 at 2016-12-28 12:06:32 +0100
+Processing by ReactiveRecord::ReactiveRecordController#fetch as */*
+  Parameters: {"json"=>"{\"models\":[{\"id\":1546, \"model\":\"Company\", \"attributes\":{\"id\":3}, \"vector\":[\"Company\", [\"find_by_id\", 3]]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_auth_share_capital\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_number_of_shares\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_share_price\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_issued_share_capital\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_paid_up_capital\"]]]}", "reactive_record"=>{"json"=>"{\"models\":[{\"id\":1546, \"model\":\"Company\", \"attributes\":{\"id\":3}, \"vector\":[\"Company\", [\"find_by_id\", 3]]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_auth_share_capital\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_number_of_shares\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_share_price\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_issued_share_capital\"]], [\"Company\", [\"find_by_id\", 3], [\"[]\", \"cap_paid_up_capital\"]]]}"}}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1[0m  [["id", 3]]
+  [1m[35mCompany Load (0.4ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/rr" for 127.0.0.1 at 2016-12-28 12:06:33 +0100
+Processing by ReactiveRecord::ReactiveRecordController#fetch as */*
+  Parameters: {"json"=>"{\"models\":[{\"id\":44228, \"model\":\"Shareholder\", \"attributes\":{\"id\":null}, \"vector\":[\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\"]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*all\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"surname\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"first_name\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"other_names\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"nationality\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_city\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_state\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_country\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"holding\"]]}", "reactive_record"=>{"json"=>"{\"models\":[{\"id\":44228, \"model\":\"Shareholder\", \"attributes\":{\"id\":null}, \"vector\":[\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\"]}], \"associations\":[], \"pending_fetches\":[[\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*all\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"surname\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"first_name\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"other_names\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"nationality\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_city\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_state\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"residential_address_country\"], [\"Company\", [\"find_by_id\", 3], \"shareholders\", \"*0\", \"holding\"]]}"}}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mCompany Load (0.3ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mShareholder Load (36.5ms)[0m  [1mSELECT "shareholders".* FROM "shareholders" WHERE "shareholders"."company_id" = $1[0m  [["company_id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "shareholders".* FROM "shareholders" WHERE "shareholders"."company_id" = $1[0m  [["company_id", 3]]
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 200 OK in 138ms (Views: 0.3ms | ActiveRecord: 39.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-28 15:10:16 +0100
+Processing by PlatformController#index as HTML
+  [1m[36mUser Load (97.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 3]]
+  [1m[35mCompany Load (126.5ms)[0m  SELECT  "companies".* FROM "companies" WHERE "companies"."id" = $1 LIMIT 1  [["id", 3]]
+Redirected to http://localhost:3000/companies/3
+Completed 302 Found in 729ms (ActiveRecord: 224.1ms)
