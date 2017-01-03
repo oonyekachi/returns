@@ -48,3 +48,7 @@ companies:
     registered_office_state: Lagos
     email: janecan@email.com
     incorporation_date: 2016-08-14
+
+helps:
+  - description: All fields marked with (*) are compulsory
+    description_type: address

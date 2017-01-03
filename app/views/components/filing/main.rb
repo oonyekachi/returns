@@ -61,7 +61,8 @@ module Components
           case state.step
 
           when 1
-            Address(company: params.company)
+            #puts Help.get_guide("address").description
+            Address(company: params.company, help: Help.get_guide("address"))
           when 2
             Location(company: params.company)
           when 3

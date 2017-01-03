@@ -7,6 +7,7 @@ module Components
       end
 
       param :company
+      param :help
       # param param_with_default: "default value"
       # param :param_with_default2, default: "default value" # alternative syntax
       # param :param_with_type, type: Hash
@@ -144,7 +145,7 @@ module Components
               div(class: "small-12 large-4 medium-4 collapse columns") do 
                 div(style: {background: "#4caf50", color: "#fff", padding: "0.5rem"}) do
                   h5 {"Help"}
-                  p {"Work in progress..."}
+                  p {params.help[:description]}
                 end
               end             
              
