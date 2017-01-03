@@ -142,8 +142,9 @@ module Components
                 end                
               end
               div(class: "small-12 large-4 medium-4 collapse columns") do 
-                div(style: {background: "#4caf50", padding: "0.5rem"}) do
+                div(style: {background: "#4caf50", color: "#fff", padding: "0.5rem"}) do
                   h5 {"Help"}
+                  p {"Work in progress..."}
                 end
               end             
              
