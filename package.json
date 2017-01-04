@@ -10,7 +10,7 @@
     "type": "git",
     "url": "appuser@lopworks.com:returns.git"
   },
-  "author": "Ademola Osindero",
+  "author": "Ademola Osindero - Lopworks Limited ",
   "license": "ISC",
   "dependencies": {
     "css-loader": "^0.26.1",
