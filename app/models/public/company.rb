@@ -27,8 +27,10 @@ class Company < ActiveRecord::Base
     changeset = {"reg"=>{}, "sit"=>{}, "cap"=>{}, "off"=>{}, "sha"=>{}, "fil"=>{}}
     tstore.each do |k, v|
       nk = k[0,3]
-      if (%w(reg sit cap fil).include? nk)
+      if (%w(reg sit cap fil off).include? nk)
         changeset[nk][k] = v unless (v.nil?) # && v.empty?)
+      elsif (%w(off sha).include? nk)
+        changeset[nk] = v unless (v.nil?)
       end
     end
     changeset
