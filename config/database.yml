@@ -84,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: returns_production
+  database: returns_development
   username: appuser
   password: Neue.P455
