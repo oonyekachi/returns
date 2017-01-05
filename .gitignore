@@ -12,3 +12,5 @@
 /node_modules
 /vendor/assets/stylesheets/brunch
 /vendor/assets/javascripts/brunch
+
+/public/assets

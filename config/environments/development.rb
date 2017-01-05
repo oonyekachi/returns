@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.eager_load_paths += %W(#{config.root}/app/views/components)
+  config.autoload_paths += %W(#{config.root}/app/views/components)
   config.react.variant = :development
   config.watchable_files.concat Dir["#{config.root}/app/views/**/*.rb"]
   # Settings specified here will take precedence over those in config/application.rb.

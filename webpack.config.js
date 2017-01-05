@@ -1,3 +1,4 @@
+require('es6-promise').polyfill();
 var path = require("path");
 var css = require("css-loader");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
