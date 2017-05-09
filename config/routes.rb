@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'payments/return' => 'payments#remita_return'
   post 'payments/poster' => 'payments#temp_poster'
   resources :payments, only: [:new]
-  mount HyperMesh::Engine => '/rr'
+  #mount HyperMesh::Engine => '/rr'
   get 'platform/index'
 
   get 'platform/error'
@@ -29,6 +29,9 @@ Rails.application.routes.draw do
 
   # mount ReactiveRecord::Engine => '/rr'
   root 'platform#index'
+
+  mount API::Base, at: "/"
+  mount GrapeSwaggerRails::Engine, at: "/documentation"
 
 
   # Example of regular route:

@@ -45,6 +45,11 @@ gem 'hyper-rails'
 gem 'countries'
 gem 'rest-client'
 gem 'npm-pipeline-rails'
+gem 'grape'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
+gem 'grape-active_model_serializers'
 
 #gem 'reactive-record'
 
